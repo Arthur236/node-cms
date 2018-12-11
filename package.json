@@ -1,0 +1,18 @@
+{
+  "name": "node-cms",
+  "version": "1.0.0",
+  "description": "A CMS in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arthur",
+  "license": "ISC",
+  "dependencies": {
+    "bulma": "^0.7.2",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "nodemon": "^1.18.8"
+  }
+}
