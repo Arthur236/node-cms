@@ -6,18 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Home</title>
   <link rel="stylesheet" href="/css/bulma.min.css">
+  <link rel="stylesheet" href="/css/main.css">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
-<body>
+<body class="site">
 
-  {{> home/nav}}
+  {{> home/nav }}
 
-  <section class="section">
+  <section class="section site-content">
     <div class="container">
       {{{ body }}}
     </div>
   </section>
+
+  {{> home/footer }}
 </body>
 
 </html>
