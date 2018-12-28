@@ -2,7 +2,8 @@ const express = require('express');
 const expressHandlebars = require('express-handlebars');
 const path = require('path');
 
-const mainRoutes = require('./routes/home/main');
+const mainRoutes = require('./routes/home/index');
+const adminRoutes = require('./routes/admin/index');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.engine('handlebars', expressHandlebars({ defaultLayout: 'index' }));
 app.set('view engine', 'handlebars');
 
 app.use('/', mainRoutes);
+app.use('/admin', adminRoutes);
 
 const port = process.env.PORT || 4000;
 

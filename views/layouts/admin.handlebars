@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin</title>
+
+  <link rel="stylesheet" href="/css/bulma.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/css/admin.css">
+</head>
+
+<body>
+  <div class="page-wrapper admin-theme toggled">
+    <a id="show-sidebar" class="button is-dark" href="#">
+      <i class="fas fa-bars"></i>
+    </a>
+
+    <aside id="sidebar" class="menu sidebar-wrapper">
+      <div class="sidebar-content">
+        <div class="sidebar-brand">
+          <i class="fab fa-centercode banner-icon"></i>
+
+          <a href="/admin">
+            Admin
+          </a>
+          <div id="close-sidebar">
+            <i class="fas fa-bars"></i>
+          </div>
+        </div>
+        
+        <!-- sidebar-search  -->
+        <div class="sidebar-menu">
+          <ul>
+            <li class="header-menu">
+              <span>General</span>
+            </li>
+            <li class="sidebar-dropdown">
+              <a href="#">
+                <i class="fas fa-tachometer-alt link-icon"></i>
+                <span>Dashboard</span>
+              </a>
+              <div class="sidebar-submenu">
+                <ul>
+                  <li>
+                    <a href="#">Dashboard 1</a>
+                  </li>
+                  <li>
+                    <a href="#">Dashboard 2</a>
+                  </li>
+                  <li>
+                    <a href="#">Dashboard 3</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="sidebar-dropdown">
+              <a href="#">
+                <i class="fas fa-shopping-cart link-icon"></i>
+                <span>E-commerce</span>
+              </a>
+              <div class="sidebar-submenu">
+                <ul>
+                  <li>
+                    <a href="#">Products
+
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">Orders</a>
+                  </li>
+                  <li>
+                    <a href="#">Credit cart</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="sidebar-dropdown">
+              <a href="#">
+                <i class="fas fa-gem link-icon"></i>
+                <span>Components</span>
+              </a>
+              <div class="sidebar-submenu">
+                <ul>
+                  <li>
+                    <a href="#">General</a>
+                  </li>
+                  <li>
+                    <a href="#">Panels</a>
+                  </li>
+                  <li>
+                    <a href="#">Tables</a>
+                  </li>
+                  <li>
+                    <a href="#">Icons</a>
+                  </li>
+                  <li>
+                    <a href="#">Forms</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="sidebar-dropdown">
+              <a href="#">
+                <i class="fas fa-chart-line link-icon"></i>
+                <span>Charts</span>
+              </a>
+              <div class="sidebar-submenu">
+                <ul>
+                  <li>
+                    <a href="#">Pie chart</a>
+                  </li>
+                  <li>
+                    <a href="#">Line chart</a>
+                  </li>
+                  <li>
+                    <a href="#">Bar chart</a>
+                  </li>
+                  <li>
+                    <a href="#">Histogram</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="sidebar-dropdown">
+              <a href="#">
+                <i class="fas fa-globe link-icon"></i>
+                <span>Maps</span>
+              </a>
+              <div class="sidebar-submenu">
+                <ul>
+                  <li>
+                    <a href="#">Google maps</a>
+                  </li>
+                  <li>
+                    <a href="#">Open street map</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="header-menu">
+              <span>Extra</span>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-calendar link-icon"></i>
+                <span>Calendar</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-folder link-icon"></i>
+                <span>Examples</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-book link-icon"></i>
+                <span>Documentation</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- sidebar-menu  -->
+      </div>
+      <!-- sidebar-content  -->
+    </aside>
+    <!-- sidebar-wrapper  -->
+
+    <main class="page-content">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-main">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div id="navbar-main" class="navbar-menu">
+          <div class="navbar-start">
+            <a href="/" class="navbar-item">
+              Home
+            </a>
+          </div>
+
+          <div class="navbar-end">
+            <a href="/register" class="navbar-item">
+              Sign up
+            </a>
+            <a href="/login" class="navbar-item">
+              Log in
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        
+      </div>
+    </main>
+    <!-- page-content" -->
+  </div>
+  <!-- page-wrapper -->
+</body>
+
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/js/bulma.js"></script>
+<script type="text/javascript" src="/js/admin.js"></script>
+
+</html>
