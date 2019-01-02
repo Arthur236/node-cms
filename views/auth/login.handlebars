@@ -1,63 +1,28 @@
-<div class="container">
-  <div class="columns is-centered">
-    <div class="column is-half">
-      <div class="card">
-        <div class="card-content">
-          <p class="title">Login</p>
-
-          <hr />
-
-          <div class="content">
-            <form action="register" method="post">
-              <div class="field">
-                <label class="label">Email</label>
-                <div class="control has-icons-left has-icons-right">
-                  <input class="input is-danger" type="email" placeholder="user@gmail.com">
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-envelope"></i>
-                  </span>
-                  <span class="icon is-small is-right">
-                    <i class="fas fa-times"></i>
-                  </span>
-                </div>
-                <p class="help is-danger">This email is invalid</p>
-              </div>
-
-              <div class="field">
-                <label class="label">Password</label>
-                <div class="control has-icons-left has-icons-right">
-                  <input class="input is-success" type="password" placeholder="Password">
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-lock"></i>
-                  </span>
-                  <span class="icon is-small is-right">
-                    <i class="fas fa-check"></i>
-                  </span>
-                </div>
-                <p class="help is-success">The password is valid</p>
-              </div>
-
-              <div class="field">
-                <div class="control">
-                  <button class="button is-link is-fullwidth">
-                    Login
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <hr />
-
-          <div class="field has-text-centered">
-            <p>Don't have an account?</p>
-            <a href="#">Register Here</a>
-          </div>
-
-          <div class="field has-text-centered">
-            <a href="#">Forgot Password?</a>
-          </div>
+<div class="splash-container">
+  <div class="card ">
+    <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="../assets/images/logo.png"
+          alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <input class="form-control form-control-lg" id="username" type="text" placeholder="Username" autocomplete="off">
         </div>
+        <div class="form-group">
+          <input class="form-control form-control-lg" id="password" type="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label class="custom-control custom-checkbox">
+            <input class="custom-control-input" type="checkbox"><span class="custom-control-label">Remember Me</span>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+      </form>
+    </div>
+    <div class="card-footer bg-white p-0  ">
+      <div class="card-footer-item card-footer-item-bordered">
+        <a href="#" class="footer-link">Create An Account</a></div>
+      <div class="card-footer-item card-footer-item-bordered">
+        <a href="#" class="footer-link">Forgot Password</a>
       </div>
     </div>
   </div>
