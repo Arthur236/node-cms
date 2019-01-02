@@ -1,0 +1,45 @@
+<div class="container-fluid dashboard-content">
+  <h3>Posts</h3>
+  
+  <div class="row">
+    {{#each posts}}
+
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="card card-figure">
+          <figure class="figure">
+            <div class="figure-img">
+              <img class="img-fluid" src="/images/card-img.jpg" alt="Card image cap">
+
+              <div class="figure-description">
+                <h6 class="figure-title"> {{title}} </h6>
+                <p class="text-muted mb-0">
+                  <small>Status: {{status}}</small>
+                </p>
+
+                <p class="text-muted mb-0">
+                  <small>Allow Comments: {{allowComments}}</small>
+                </p>
+              </div>
+
+              <div class="figure-action">
+                <a href="#" class="btn btn-block btn-sm btn-primary">View</a>
+              </div>
+            </div>
+
+            <figcaption class="figure-caption">
+              <ul class="list-inline d-flex text-muted mb-0">
+                <li class="list-inline-item mr-auto">
+                  <span class="oi oi-paperclip"></span> {{title}} </li>
+                <li class="list-inline-item">
+                  <span class="oi oi-calendar"></span>
+                </li>
+              </ul>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+    {{/each}}
+
+  </div>
+</div>
