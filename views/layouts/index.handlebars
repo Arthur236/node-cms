@@ -4,32 +4,39 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
-  <link href="/vendor/fonts/circular-std/style.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/vendor/fonts/circular-std/style.css">
   <link rel="stylesheet" href="/vendor/fonts/fontawesome/css/fontawesome-all.css">
   <link rel="stylesheet" href="/vendor/charts/chartist-bundle/chartist.css">
   <link rel="stylesheet" href="/vendor/charts/morris-bundle/morris.css">
   <link rel="stylesheet" href="/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="/vendor/charts/c3charts/c3.css">
   <link rel="stylesheet" href="/vendor/fonts/flag-icon-css/flag-icon.min.css">
+  <link rel="stylesheet" href="/vendor/medium-editor/css/medium-editor.min.css">
+  <link rel="stylesheet" href="/vendor/medium-editor/css/themes/default.min.css">
 
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/main.css">
+
   <title>Node CMS</title>
 </head>
 
 <body>
 
-  {{> home/nav }}
+  <div class="dashboard-main-wrapper">
+    {{> home/nav }}
 
-  {{{ body }}}
+    <div class="dashboard-wrapper">
+      {{{ body }}}
 
-  {{> footer }}
+      {{> footer }}
+    </div>
+  </div>
 
   <script src="/vendor/jquery/jquery-3.3.1.min.js"></script>
   <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="/vendor/slimscroll/jquery.slimscroll.js"></script>
-  <script src="/js/main-js.js"></script>
   <script src="/vendor/charts/chartist-bundle/chartist.min.js"></script>
   <script src="/vendor/charts/sparkline/jquery.sparkline.js"></script>
   <script src="/vendor/charts/morris-bundle/raphael.min.js"></script>
@@ -37,6 +44,9 @@
   <script src="/vendor/charts/c3charts/c3.min.js"></script>
   <script src="/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
   <script src="/vendor/charts/c3charts/C3chartjs.js"></script>
+  <script src="/vendor/medium-editor/js/medium-editor.min.js"></script>
+
+  <script src="/js/main-js.js"></script>
   <script src="/js/dashboard-ecommerce.js"></script>
 </body>
 

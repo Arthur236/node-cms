@@ -10,9 +10,11 @@
   "author": "Arthur",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "bulma": "^0.7.2",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
+    "mongoose": "^5.4.1",
     "nodemon": "^1.18.8"
   }
 }
