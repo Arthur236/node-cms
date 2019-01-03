@@ -1,6 +1,20 @@
 <div class="container-fluid dashboard-content">
-  <h3>Posts</h3>
-  
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="page-header">
+        <h2 class="pageheader-title">Posts</h2>
+        <div class="page-breadcrumb">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/admin" class="breadcrumb-link">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Posts</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     {{#each posts}}
 
@@ -22,7 +36,7 @@
               </div>
 
               <div class="figure-action">
-                <a href="#" class="btn btn-block btn-sm btn-primary">View</a>
+                <a href="/admin/posts/{{id}}" class="btn btn-block btn-sm btn-primary">View</a>
               </div>
             </div>
 

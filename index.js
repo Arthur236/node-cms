@@ -3,6 +3,9 @@ const expressHandlebars = require('express-handlebars');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+
+const { select } = require('./utils/handlebarsHelpers');
 
 mongoose.connect('mongodb://localhost:27017/node-cms',  { useNewUrlParser: true })
   .then((db) => {
@@ -24,11 +27,12 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Define the template engine to be used
  * Express handlebars looks for layouts inside our views/layouts folder by default
  */
-app.engine('handlebars', expressHandlebars({ defaultLayout: 'index' }));
+app.engine('handlebars', expressHandlebars({ defaultLayout: 'index', helpers: { selectHelper: select } }));
 app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(methodOverride('_method'));
 
 app.use('/', mainRoutes);
 app.use('/auth', authRoutes);
