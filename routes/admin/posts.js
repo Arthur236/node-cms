@@ -70,4 +70,12 @@ router.put('/edit/:id', (req, res) => {
   });
 });
 
+router.delete('/:id', (req, res) => {
+  Post.deleteOne({ _id: req.params.id }).then((deletedPost) => {
+    res.redirect('/admin/posts');
+  }).catch((error) => {
+    console.log('Could not delete that post\n', error);
+  });
+});
+
 module.exports = router;
