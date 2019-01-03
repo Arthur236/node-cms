@@ -22,7 +22,7 @@
         <div class="card card-figure">
           <figure class="figure">
             <div class="figure-img">
-              <img class="img-fluid" src="/images/card-img.jpg" alt="Card image cap">
+              <img class="img-fluid" {{#if photo}} src="/uploads/{{photo}}" {{else}} src="/images/card-placeholder.png" {{/if}} alt="{{title}}">
 
               <div class="figure-description">
                 <h6 class="figure-title"> {{title}} </h6>

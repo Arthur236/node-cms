@@ -18,6 +18,10 @@ const PostSchema = new Schema({
   description: {
     type: String,
     required: true
+  },
+  photo: {
+    type: String,
+    default: ''
   }
 });
 

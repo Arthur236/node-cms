@@ -1,3 +1,4 @@
+/* eslint-disable */
 const editor = new MediumEditor('.editable', {
   toolbar: {
     buttons: [
@@ -17,7 +18,10 @@ const editor = new MediumEditor('.editable', {
     hideOnClick: false
   },
   forcePlainText: false,
-  autoLink: true
+  autoLink: true,
+  extensions: {
+    'imageDragging': {}
+  }
 });
 
 const nonEditableEditor = new MediumEditor('.editor', {
@@ -25,5 +29,8 @@ const nonEditableEditor = new MediumEditor('.editor', {
   toolbar: false,
   placeholder: false,
   forcePlainText: false,
-  autoLink: true
+  autoLink: true,
+  extensions: {
+    'imageDragging': {}
+  }
 });
