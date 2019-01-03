@@ -1,0 +1,50 @@
+<div class="container-fluid dashboard-content">
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="page-header">
+        <h2 class="pageheader-title">{{post.title}}</h2>
+        <div class="page-breadcrumb">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/admin" class="breadcrumb-link">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="/admin/posts" class="breadcrumb-link">Posts</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{post.title}}</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="card">
+        <h5 class="card-header">{{post.title}}</h5>
+        <div class="card-body">
+          <div class="media">
+            <div class="media-body">
+              <h5>Status: {{post.status}}</h5>
+              <h6>Allow Comments: {{post.allowComments}}</h6>
+
+              <textarea class="editor">
+                {{post.description}}
+              </textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div class="float-left">
+            <form action="/admin/posts/{{post.id}}?_method=delete" method="post">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <a href="/admin/posts/edit/{{post.id}}" class="btn btn-primary clearfix">Edit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
