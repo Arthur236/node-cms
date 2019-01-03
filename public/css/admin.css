@@ -7,3 +7,7 @@
   position: absolute;
   bottom: 0;
 }
+
+.medium-editor-element {
+  min-height: 120px;
+}

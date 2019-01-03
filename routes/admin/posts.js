@@ -37,4 +37,37 @@ router.post('/create', (req, res) => {
   });
 });
 
+router.get('/:id', (req, res) => {
+  Post.findOne({ _id: req.params.id }).then((post) => {
+    res.render('admin/posts/view', { post });
+  }).catch((error) => {
+    console.log('Could not find that post\n', error);
+  });
+});
+
+router.get('/edit/:id', (req, res) => {
+  Post.findOne({ _id: req.params.id }).then((post) => {
+    res.render('admin/posts/edit', { post });
+  }).catch((error) => {
+    console.log('Could not find that post\n', error);
+  });
+});
+
+router.put('/edit/:id', (req, res) => {
+  Post.findOne({ _id: req.params.id }).then((post) => {
+    const allowComments = !!req.body.allowComments;
+
+    post.title = req.body.title;
+    post.status = req.body.status;
+    post.allowComments = allowComments;
+    post.description = req.body.description;
+
+    post.save().then((updatedPost) => {
+      res.redirect(`/admin/posts/${post.id}`);
+    });
+  }).catch((error) => {
+    console.log('Could not find that post\n', error);
+  });
+});
+
 module.exports = router;

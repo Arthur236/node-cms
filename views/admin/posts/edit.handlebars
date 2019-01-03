@@ -2,12 +2,13 @@
   <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="page-header">
-        <h2 class="pageheader-title">Create Post</h2>
+        <h2 class="pageheader-title">Edit Post</h2>
         <div class="page-breadcrumb">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/admin" class="breadcrumb-link">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Create Post</li>
+              <li class="breadcrumb-item"><a href="/admin/posts/{{post.id}}" class="breadcrumb-link">{{post.title}}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Edit Post</li>
             </ol>
           </nav>
         </div>
@@ -18,40 +19,43 @@
   <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="card">
-        <h5 class="card-header">Create A New Post</h5>
+        <h5 class="card-header">Edit {{post.title}}</h5>
 
         <div class="card-body">
-          <form action="/admin/posts/create" method="post">
+          <form action="/admin/posts/edit/{{post.id}}?_method=put" method="post">
             <div class="form-group">
               <label for="title" class="col-form-label">Title</label>
-              <input id="title" name="title" type="text" class="form-control" placeholder="Enter Title">
+              <input id="title" name="title" type="text" class="form-control" value="{{post.title}}"/>
             </div>
 
             <div class="form-group">
               <label for="status">Status</label>
               <select id="status" name="status" class="form-control">
                 <option>Choose Status</option>
-                <option value="public">Public</option>
-                <option value="private">Private</option>
-                <option value="draft">Draft</option>
+                {{#selectHelper post.status}}
+                  <option value="public">Public</option>
+                  <option value="private">Private</option>
+                  <option value="draft">Draft</option>
+                {{/selectHelper}}
               </select>
             </div>
 
             <div class="form-group">
               <label class="custom-control custom-checkbox">
-                <input id="allowComments" name="allowComments" type="checkbox" checked="" class="custom-control-input">
+                <input id="allowComments" name="allowComments" type="checkbox" class="custom-control-input"
+                {{#if post.allowComments}} checked="checked" {{/if}}>
                 <span class="custom-control-label">Allow Comments</span>
               </label>
             </div>
 
             <div class="form-group">
               <label for="description">Description</label>
-              <textarea id="description" name="description" class="form-control editable"></textarea>
+              <textarea id="description" name="description" class="form-control editable">{{post.description}}</textarea>
               <p>Highlight text to enable formatting. You can also drag and drop images.</p>
             </div>
 
             <div class="form-group">
-              <button class="btn btn-primary" type="submit">Create Post</button>
+              <button class="btn btn-primary" type="submit">Save Changes</button>
             </div>
           </form>
         </div>
