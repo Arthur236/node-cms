@@ -1,4 +1,6 @@
 const express = require('express');
+const faker = require('faker');
+
 const Post = require('../../models/Post');
 
 const router = express.Router();
@@ -35,6 +37,25 @@ router.post('/create', (req, res) => {
   }).catch((error) => {
     console.log('Could not create your post\n', error);
   });
+});
+
+router.get('/generate', (req, res) => {
+  res.render('admin/posts/generate');
+});
+
+router.post('/generate', (req, res) => {
+  for(let i = 0; i < req.body.amount; i++) {
+    const post = new Post();
+
+    post.title = faker.random.words();
+    post.status = "public";
+    post.allowComments = faker.random.boolean();
+    post.description = faker.lorem.sentences();
+
+    post.save().then((savedPost) => {});
+  }
+
+  res.redirect('/admin/posts');
 });
 
 router.get('/:id', (req, res) => {
