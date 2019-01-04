@@ -2,10 +2,11 @@ const express = require('express');
 const faker = require('faker');
 const fs = require('fs');
 const path = require('path');
+const { isEmpty } = require('lodash');
 
 const Post = require('../../models/Post');
 
-const { isEmpty, uploadDir } = require('../../utils/uploadHelper');
+const {uploadDir} = require('../../utils/uploadHelper');
 
 const router = express.Router();
 
@@ -27,33 +28,50 @@ router.get('/create', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-  const allowComments = !!req.body.allowComments;
+  let errors = {};
 
-  const newPost = new Post();
-  newPost.title = req.body.title;
-  newPost.status = req.body.status;
-  newPost.allowComments = allowComments;
-  newPost.description = req.body.description;
-
-  if (!isEmpty(req.files)) {
-    const file = req.files.photo;
-    const filename = Date.now() + '-' + file.name;
-    const dirUploads = './public/uploads/';
-
-    file.mv(dirUploads + filename, (error) => {
-      if (error) {
-        console.log(error);
-      }
-
-      newPost.photo = filename;
-    });
+  if (!req.body.title) {
+    errors.title = 'Please add a title';
   }
 
-  newPost.save().then((savedPost) => {
-    res.redirect('/admin/posts');
-  }).catch((error) => {
-    console.log('Could not create your post\n', error);
-  });
+  if (!req.body.description) {
+    errors.description = 'Please add a description';
+  }
+
+  console.log(errors)
+
+  if (!isEmpty(errors)) {
+    res.render('admin/posts/create', {errors: errors});
+  } else {
+    const allowComments = !!req.body.allowComments;
+
+    const newPost = new Post();
+    newPost.title = req.body.title;
+    newPost.status = req.body.status;
+    newPost.allowComments = allowComments;
+    newPost.description = req.body.description;
+
+    if (!isEmpty(req.files)) {
+      const file = req.files.photo;
+      const filename = Date.now() + '-' + file.name;
+      const dirUploads = './public/uploads/';
+
+      file.mv(dirUploads + filename, (error) => {
+        if (error) {
+          console.log(error);
+        }
+
+        newPost.photo = filename;
+      });
+    }
+
+    newPost.save().then((savedPost) => {
+      res.redirect('/admin/posts');
+    }).catch((error) => {
+      console.log('Could not create your post\n', error);
+      res.render('admin/posts/create', {errors: error.errors});
+    });
+  }
 });
 
 router.get('/generate', (req, res) => {
