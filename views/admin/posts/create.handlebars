@@ -24,12 +24,15 @@
           <form action="/admin/posts/create" method="post" enctype="multipart/form-data">
             <div class="form-group">
               <label for="title" class="col-form-label">Title</label>
-              <input id="title" name="title" type="text" class="form-control" placeholder="Enter Title">
+              <input id="title" name="title" type="text" class="form-control {{#if errors.title}} is-invalid {{/if}}" placeholder="Enter Title" required>
+              <div class="invalid-feedback">
+                {{errors.title}}
+              </div>
             </div>
 
             <div class="form-group">
               <label for="status">Status</label>
-              <select id="status" name="status" class="form-control">
+              <select id="status" name="status" class="form-control" required>
                 <option>Choose Status</option>
                 <option value="public">Public</option>
                 <option value="private">Private</option>
@@ -51,7 +54,10 @@
 
             <div class="form-group">
               <label for="description">Description</label>
-              <textarea id="description" name="description" class="form-control editable"></textarea>
+              <textarea id="description" name="description" class="form-control editable {{#if errors.description}} is-invalid {{/if}}" required></textarea>
+              <div class="invalid-feedback">
+                {{errors.description}}
+              </div>
               <p>Highlight text to enable formatting.</p>
             </div>
 
