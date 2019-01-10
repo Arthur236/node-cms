@@ -27,6 +27,7 @@
             <div class="media-body">
               <h5>Status: {{post.status}}</h5>
               <h6>Allow Comments: {{post.allowComments}}</h6>
+              <h6>Date: {{formatDate date 'MMMM Do YYYY'}}</h6>
 
               <p>
                 <img {{#if post.photo}} src="/uploads/{{post.photo}}" {{else}} src="/images/card-placeholder.png" {{/if}} class="img-fluid" alt="{{post.title}}"/>

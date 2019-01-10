@@ -22,6 +22,10 @@ const PostSchema = new Schema({
   photo: {
     type: String,
     default: ''
+  },
+  date: {
+    type: Date,
+    default: Date.now()
   }
 });
 

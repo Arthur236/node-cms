@@ -15,7 +15,7 @@ const authRoutes = require('./routes/auth/index');
 const adminRoutes = require('./routes/admin/index');
 const posts = require('./routes/admin/posts');
 
-const { select } = require('./utils/handlebarsHelpers');
+const { select, formatDate } = require('./utils/handlebarsHelpers');
 
 const app = express();
 
@@ -32,7 +32,9 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Define the template engine to be used
  * Express handlebars looks for layouts inside our views/layouts folder by default
  */
-app.engine('handlebars', expressHandlebars({ defaultLayout: 'index', helpers: { selectHelper: select } }));
+app.engine('handlebars', expressHandlebars({ defaultLayout: 'index',
+  helpers: { selectHelper: select, formatDate } })
+);
 app.set('view engine', 'handlebars');
 
 app.use(upload());
