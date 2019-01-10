@@ -22,7 +22,7 @@
         <h5 class="card-header">Edit {{post.title}}</h5>
 
         <div class="card-body">
-          <form action="/admin/posts/edit/{{post.id}}?_method=put" method="post">
+          <form action="/admin/posts/edit/{{post.id}}?_method=put" method="post" enctype="multipart/form-data">
             <div class="form-group">
               <label for="title" class="col-form-label">Title</label>
               <input id="title" name="title" type="text" class="form-control" value="{{post.title}}"/>

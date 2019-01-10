@@ -8,6 +8,8 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
+  req.session.app = 'App';
+
   res.render('home/index');
 });
 
