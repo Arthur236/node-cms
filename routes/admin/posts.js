@@ -6,7 +6,7 @@ const { isEmpty } = require('lodash');
 
 const Post = require('../../models/Post');
 
-const {uploadDir} = require('../../utils/uploadHelper');
+const { uploadDir } = require('../../utils/uploadHelper');
 
 const router = express.Router();
 
@@ -38,8 +38,6 @@ router.post('/create', (req, res) => {
     errors.description = 'Please add a description';
   }
 
-  console.log(errors)
-
   if (!isEmpty(errors)) {
     res.render('admin/posts/create', {errors: errors});
   } else {
@@ -54,18 +52,19 @@ router.post('/create', (req, res) => {
     if (!isEmpty(req.files)) {
       const file = req.files.photo;
       const filename = Date.now() + '-' + file.name;
-      const dirUploads = './public/uploads/';
 
-      file.mv(dirUploads + filename, (error) => {
+      file.mv(uploadDir + filename, (error) => {
         if (error) {
           console.log(error);
         }
-
-        newPost.photo = filename;
       });
+
+      newPost.photo = filename;
     }
 
     newPost.save().then((savedPost) => {
+      req.flash('success_message', `The post ${savedPost.title} was successfully created`);
+
       res.redirect('/admin/posts');
     }).catch((error) => {
       console.log('Could not create your post\n', error);
@@ -119,7 +118,28 @@ router.put('/edit/:id', (req, res) => {
     post.allowComments = allowComments;
     post.description = req.body.description;
 
+    if (!isEmpty(req.files)) {
+      const file = req.files.photo;
+      const filename = Date.now() + '-' + file.name;
+
+      if(post.photo !== '') {
+        fs.unlink(uploadDir + post.photo, (err) => {
+          if (err) console.log(err);
+        });
+      }
+
+      file.mv(uploadDir + filename, (error) => {
+        if (error) {
+          console.log(error);
+        }
+      });
+
+      post.photo = filename;
+    }
+
     post.save().then((updatedPost) => {
+      req.flash('success_message', `${updatedPost.title} was updated successfully`);
+
       res.redirect(`/admin/posts/${post.id}`);
     });
   }).catch((error) => {
@@ -129,10 +149,14 @@ router.put('/edit/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   Post.findOne({_id: req.params.id}).then((post) => {
-    fs.unlink(uploadDir + post.photo, (err) => {
-      console.log(err);
+    if(post.photo !== '') {
+      fs.unlink(uploadDir + post.photo, (err) => {
+        if (err) console.log(err);
+      });
+    }
 
-      post.remove();
+    post.remove().then((deletedPost) => {
+      req.flash('success_message', `${deletedPost.title} was deleted successfully`);
 
       res.redirect('/admin/posts');
     });

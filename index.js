@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const upload = require('express-fileupload');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 const mainRoutes = require('./routes/home/index');
 const authRoutes = require('./routes/auth/index');
@@ -37,6 +39,20 @@ app.use(upload());
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(bodyParser.json({ limit: '10mb', extended: true }));
 app.use(methodOverride('_method'));
+app.use(session({
+  secret: 'youwillneverguess',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(flash());
+
+/*
+ * Define local variables to store flash messages using middleware
+ */
+app.use((req, res, next) => {
+  res.locals.success_message = req.flash('success_message');
+  next();
+});
 
 app.use('/', mainRoutes);
 app.use('/auth', authRoutes);
