@@ -1,4 +1,5 @@
 const express = require('express');
+const Post = require('../../models/Post');
 
 const router = express.Router();
 
@@ -10,15 +11,19 @@ router.all('/*', (req, res, next) => {
 router.get('/', (req, res) => {
   req.session.app = 'App';
 
-  res.render('home/index');
+  Post.find({}).then((posts) => {
+    res.render('home/index', { posts: posts });
+  }).catch((error) => {
+    console.log(error);
+  });
 });
 
-router.get('/login', (req, res) => {
-  res.render('auth/login');
-});
-
-router.get('/register', (req, res) => {
-  res.render('auth/register');
+router.get('/post/:id', (req, res) => {
+  Post.findOne({ _id: req.params.id }).then((post) => {
+    res.render('home/post', { post: post });
+  }).catch((error) => {
+    console.log(error);
+  });
 });
 
 module.exports = router;
