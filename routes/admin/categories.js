@@ -14,7 +14,9 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-  res.render('admin/categories/index');
+  Category.find({}).then((categories) => {
+    res.render('admin/categories', { categories });
+  });
 });
 
 router.post('/create', (req, res) => {
@@ -23,8 +25,8 @@ router.post('/create', (req, res) => {
   });
 
   newCategory.save().then((savedCategory) => {
-    res.render('admin/categories/index');
-    console.log(savedCategory.name, 'category created successfully');
+    res.redirect('/admin/categories');
+    console.log(`${savedCategory.name} category created successfully`);
   });
 });
 

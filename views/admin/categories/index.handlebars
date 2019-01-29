@@ -53,10 +53,12 @@
               </thead>
 
               <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                </tr>
+                {{#each categories}}
+                  <tr>
+                    <td>{{ name }}</td>
+                    <td>{{ date }}</td>
+                  </tr>
+                {{/each}}
               </tbody>
             </table>
           </div>
