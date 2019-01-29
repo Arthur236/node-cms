@@ -1,0 +1,67 @@
+<div class="container-fluid dashboard-content">
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="page-header">
+        <h2 class="pageheader-title">Categories</h2>
+        <div class="page-breadcrumb">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/admin" class="breadcrumb-link">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Categories</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-4">
+      <div class="card">
+        <h5 class="card-header">Create A New Category</h5>
+
+        <div class="card-body">
+          <form action="/admin/categories/create" method="post">
+            <div class="form-group">
+              <label for="name" class="col-form-label">Name</label>
+              <input id="name" name="name" type="text" class="form-control {{#if errors.name}} is-invalid {{/if}}" placeholder="Enter Name" required>
+              <div class="invalid-feedback">
+                {{errors.name}}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button class="btn btn-primary" type="submit">Create Category</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-8">
+      <div class="card">
+        <h5 class="card-header">Category List</h5>
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

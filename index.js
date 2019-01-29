@@ -14,6 +14,7 @@ const mainRoutes = require('./routes/home/index');
 const authRoutes = require('./routes/auth/index');
 const adminRoutes = require('./routes/admin/index');
 const posts = require('./routes/admin/posts');
+const categories = require('./routes/admin/categories');
 
 const { select, formatDate } = require('./utils/handlebarsHelpers');
 
@@ -60,6 +61,7 @@ app.use('/', mainRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/admin/posts', posts);
+app.use('/admin/categories', categories);
 
 const port = process.env.PORT || 4000;
 
