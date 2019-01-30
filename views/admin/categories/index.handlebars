@@ -55,8 +55,9 @@
               <tbody>
                 {{#each categories}}
                   <tr>
-                    <td>{{ name }}</td>
-                    <td>{{ date }}</td>
+                    <td>{{name}}</td>
+                    <td>{{date}}</td>
+                    <td><a href="/admin/categories/edit/{{id}}" title="Edit {{name}}"><i class="fas fa-edit"></i></a></td>
                   </tr>
                 {{/each}}
               </tbody>

@@ -1,8 +1,4 @@
 const express = require('express');
-const faker = require('faker');
-const fs = require('fs');
-const path = require('path');
-const { isEmpty } = require('lodash');
 
 const Category = require('../../models/Category');
 
@@ -27,6 +23,26 @@ router.post('/create', (req, res) => {
   newCategory.save().then((savedCategory) => {
     res.redirect('/admin/categories');
     console.log(`${savedCategory.name} category created successfully`);
+  });
+});
+
+router.get('/edit/:id', (req, res) => {
+  Category.findOne({ _id: req.params.id }).then((category) => {
+    res.render('admin/categories/edit', { category });
+  }).catch((error) => {
+    console.log('Could not find that category\n', error);
+  });
+});
+
+router.put('/edit/:id', (req, res) => {
+  Category.findOne({ _id: req.params.id }).then((category) => {
+    category.name = req.body.name;
+
+    category.save().then((updatedCategroy) => {
+      res.redirect('/admin/categories');
+    });
+  }).catch((error) => {
+    console.log('Could not find that category\n', error);
   });
 });
 
