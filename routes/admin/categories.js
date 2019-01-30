@@ -46,4 +46,16 @@ router.put('/edit/:id', (req, res) => {
   });
 });
 
+router.delete('/:id', (req, res) => {
+  Category.findOne({ _id: req.params.id }).then((category) => {
+    category.remove().then((deletedCategory) => {
+      req.flash('success_message', `${deletedCategory.name} was deleted successfully`);
+
+      res.redirect('/admin/categories');
+    });
+  }).catch((error) => {
+    console.log('Could not delete that category\n', error);
+  });
+});
+
 module.exports = router;
