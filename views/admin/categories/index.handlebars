@@ -49,6 +49,8 @@
                 <tr>
                   <th>Name</th>
                   <th>Created</th>
+                  <th></th>
+                  <th></th>
                 </tr>
               </thead>
 
@@ -57,7 +59,12 @@
                   <tr>
                     <td>{{name}}</td>
                     <td>{{date}}</td>
-                    <td><a href="/admin/categories/edit/{{id}}" title="Edit {{name}}"><i class="fas fa-edit"></i></a></td>
+                    <td><a href="/admin/categories/edit/{{id}}" title="Edit {{name}}"><button class="btn btn-xs btn-primary">Edit</button></a></td>
+                    <td>
+                      <form id="form-delete-category" action="/admin/categories/{{id}}?_method=delete" method="post">
+                        <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                      </form>
+                    </td>
                   </tr>
                 {{/each}}
               </tbody>
