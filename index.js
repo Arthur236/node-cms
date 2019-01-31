@@ -10,21 +10,22 @@ const upload = require('express-fileupload');
 const session = require('express-session');
 const flash = require('connect-flash');
 
+const { select, formatDate } = require('./utils/handlebarsHelpers');
+
 const mainRoutes = require('./routes/home/index');
 const authRoutes = require('./routes/auth/index');
 const adminRoutes = require('./routes/admin/index');
+const categories = require('./routes/admin/categories');
 const posts = require('./routes/admin/posts');
-
-const { select, formatDate } = require('./utils/handlebarsHelpers');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/node-cms',  { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/node-cms', { useNewUrlParser: true })
   .then((db) => {
-    console.log("DB connected")
+    console.log('DB connected');
   }).catch((error) => {
-    console.log("Could not connect to DB: ", error);
-});
+    console.log('Could not connect to DB: ', error);
+  });
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -32,9 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Define the template engine to be used
  * Express handlebars looks for layouts inside our views/layouts folder by default
  */
-app.engine('handlebars', expressHandlebars({ defaultLayout: 'index',
-  helpers: { selectHelper: select, formatDate } })
-);
+app.engine('handlebars', expressHandlebars({ defaultLayout: 'index', helpers: { selectHelper: select, formatDate } }));
 app.set('view engine', 'handlebars');
 
 app.use(upload());
@@ -44,7 +43,7 @@ app.use(methodOverride('_method'));
 app.use(session({
   secret: 'youwillneverguess',
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
 }));
 app.use(flash());
 
@@ -56,9 +55,13 @@ app.use((req, res, next) => {
   next();
 });
 
+/*
+ * Defining our routes
+ */
 app.use('/', mainRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
+app.use('/admin/categories', categories);
 app.use('/admin/posts', posts);
 
 const port = process.env.PORT || 4000;
