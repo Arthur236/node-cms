@@ -1,20 +1,18 @@
-<!-- ============================================================== -->
-<!-- main wrapper -->
-<!-- ============================================================== -->
-<div class="dashboard-main-wrapper">
-  <!-- ============================================================== -->
-  <!-- wrapper  -->
-  <!-- ============================================================== -->
-  <div class="dashboard-wrapper">
-    <div class="container-fluid dashboard-content">
-      <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <h3 class="text-center">Content goes here!</h3>
+<div class="container-fluid dashboard-content">
+  <div class="row">
+    {{#each posts}}
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+          <img {{#if photo}} src="/uploads/{{photo}}" {{else}} src="/images/card-placeholder.png" {{/if}} class="img-fluid" alt="{{title}}"/>
+          <div class="card-body">
+            <h3 class="card-title">{{title}}</h3>
+            <textarea class="editor card-text">{{description}}</textarea>
+            <p><a href="/post/{{id}}" class="btn btn-primary">Read More &rarr;</a></p>
+            <p class="text-muted">Posted on {{formatDate date 'MMMM Do YYYY'}}</p>
+          </div>
         </div>
       </div>
-    </div>
+    {{/each}}
   </div>
 </div>
-<!-- ============================================================== -->
-<!-- end main wrapper -->
-<!-- ============================================================== -->
+
