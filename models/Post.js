@@ -23,6 +23,10 @@ const PostSchema = new Schema({
     type: String,
     default: '',
   },
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: 'Category',
+  },
   date: {
     type: Date,
     default: Date.now(),
