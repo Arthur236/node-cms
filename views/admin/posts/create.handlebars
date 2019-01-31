@@ -1,0 +1,82 @@
+<div class="container-fluid dashboard-content">
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="page-header">
+        <h2 class="pageheader-title">Create Post</h2>
+        <div class="page-breadcrumb">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/admin" class="breadcrumb-link">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Create Post</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="card">
+        <h5 class="card-header">Create A New Post</h5>
+
+        <div class="card-body">
+          <form action="/admin/posts/create" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="title" class="col-form-label">Title</label>
+              <input id="title" name="title" type="text" class="form-control {{#if errors.title}} is-invalid {{/if}}" placeholder="Enter Title" required>
+              <div class="invalid-feedback">
+                {{errors.title}}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="status">Status</label>
+              <select id="status" name="status" class="form-control" required>
+                <option>Choose Status</option>
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+                <option value="draft">Draft</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select id="category" name="category" class="form-control">
+                <option>Choose Category</option>
+                {{#each categories}}
+                  <option value="{{id}}">{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="custom-control custom-checkbox">
+                <input id="allowComments" name="allowComments" type="checkbox" checked="" class="custom-control-input">
+                <span class="custom-control-label">Allow Comments</span>
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label for="photo" class="col-form-label">Add Photo</label>
+              <input id="photo" name="photo" type="file" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea id="description" name="description" class="form-control editable {{#if errors.description}} is-invalid {{/if}}" required></textarea>
+              <div class="invalid-feedback">
+                {{errors.description}}
+              </div>
+              <p>Highlight text to enable formatting.</p>
+            </div>
+
+            <div class="form-group">
+              <button class="btn btn-primary" type="submit">Create Post</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
