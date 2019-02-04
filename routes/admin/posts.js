@@ -1,7 +1,6 @@
 const express = require('express');
 const faker = require('faker');
 const fs = require('fs');
-const path = require('path');
 const { isEmpty } = require('lodash');
 
 const Category = require('../../models/Category');
