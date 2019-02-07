@@ -13,14 +13,17 @@
           {{errors.username}}
         </div>
       </div>
+
       <div class="form-group">
         <input class="form-control form-control-lg" id="firstName" name="firstName" type="text" value="{{firstName}}"
                placeholder="First Name">
       </div>
+
       <div class="form-group">
         <input class="form-control form-control-lg" id="lastName" name="lastName" type="text" value="{{lastName}}"
                placeholder="Last Name">
       </div>
+
       <div class="form-group">
         <input class="form-control form-control-lg {{#if errors.email}} is-invalid {{/if}}" id="email" name="email"
                type="email" placeholder="E-mail *" value="{{email}}" required>
@@ -28,6 +31,7 @@
           {{errors.email}}
         </div>
       </div>
+
       <div class="form-group">
         <input class="form-control form-control-lg {{#if errors.password}} is-invalid {{/if}}" id="password"
                name="password" type="password" placeholder="Password *" required>
@@ -35,6 +39,7 @@
           {{errors.password}}
         </div>
       </div>
+
       <div class="form-group">
         <input class="form-control form-control-lg {{#if errors.password2}} is-invalid {{/if}}" id="password2"
                name="password2" type="password" placeholder="Confirm Password *" required>
@@ -42,6 +47,7 @@
           {{errors.password2}}
         </div>
       </div>
+
       <div class="form-group">
         <label class="custom-control custom-checkbox">
           <input class="custom-control-input" type="checkbox" required>
@@ -50,9 +56,11 @@
             </span>
         </label>
       </div>
+
       <div class="form-group pt-2">
         <button class="btn btn-block btn-primary" type="submit">Register My Account</button>
       </div>
+
       <div class="form-group row pt-0">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
           <button class="btn btn-block btn-social btn-facebook " type="button">Facebook</button>
@@ -62,6 +70,7 @@
         </div>
       </div>
     </div>
+
     <div class="card-footer bg-white">
       <p>Already member? <a href="#" class="text-secondary">Login Here.</a></p>
     </div>

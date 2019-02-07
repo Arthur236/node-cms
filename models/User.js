@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const { Schema } = mongoose;
 
@@ -24,6 +25,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     minlength: 6,
+  },
+  is_admin: {
+    type: Boolean,
+    default: false,
   },
   dateJoined: {
     type: Date,
