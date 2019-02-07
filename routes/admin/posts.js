@@ -1,17 +1,17 @@
 const express = require('express');
 const faker = require('faker');
 const fs = require('fs');
-const path = require('path');
 const { isEmpty } = require('lodash');
 
 const Category = require('../../models/Category');
 const Post = require('../../models/Post');
 
 const { uploadDir } = require('../../utils/uploadHelper');
+const { userIsAdmin } = require('../../utils/authenticate');
 
 const router = express.Router();
 
-router.all('/*', (req, res, next) => {
+router.all('/*', userIsAdmin, (req, res, next) => {
   req.app.locals.layout = 'admin';
   next();
 });
