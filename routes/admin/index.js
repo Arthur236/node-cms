@@ -1,8 +1,10 @@
 const express = require('express');
 
+const { userIsAdmin } = require('../../utils/authenticate');
+
 const router = express.Router();
 
-router.all('/*', (req, res, next) => {
+router.all('/*', userIsAdmin, (req, res, next) => {
   req.app.locals.layout = 'admin';
   next();
 });
