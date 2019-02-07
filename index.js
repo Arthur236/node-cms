@@ -80,6 +80,12 @@ app.use('/admin', adminRoutes);
 app.use('/admin/categories', categories);
 app.use('/admin/posts', posts);
 
+app.use(function(req, res, next){
+  req.app.locals.layout = 'errors';
+
+  res.status(404).render('errors/404');
+});
+
 const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
