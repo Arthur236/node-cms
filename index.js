@@ -19,6 +19,8 @@ const authRoutes = require('./routes/auth/index');
 const adminRoutes = require('./routes/admin/index');
 const categories = require('./routes/admin/categories');
 const posts = require('./routes/admin/posts');
+const comments = require('./routes/home/comments');
+const userPosts = require('./routes/users/posts');
 
 const app = express();
 
@@ -79,6 +81,14 @@ app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/admin/categories', categories);
 app.use('/admin/posts', posts);
+app.use('/comments', comments);
+app.use('/user/posts', userPosts);
+
+app.use(function(req, res, next){
+  req.app.locals.layout = 'errors';
+
+  res.status(404).render('errors/404');
+});
 
 const port = process.env.PORT || 4000;
 

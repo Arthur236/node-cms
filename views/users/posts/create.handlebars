@@ -2,13 +2,12 @@
   <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="page-header">
-        <h2 class="pageheader-title">Edit Post</h2>
+        <h2 class="pageheader-title">Create Post</h2>
         <div class="page-breadcrumb">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/admin" class="breadcrumb-link">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="/admin/posts/{{post.id}}" class="breadcrumb-link">{{post.title}}</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Edit Post</li>
+              <li class="breadcrumb-item"><a href="/user/posts" class="breadcrumb-link">My Posts</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Create Post</li>
             </ol>
           </nav>
         </div>
@@ -21,31 +20,32 @@
   <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="card">
-        <h5 class="card-header">Edit {{post.title}}</h5>
+        <h5 class="card-header">Create A New Post</h5>
 
         <div class="card-body">
-          <form action="/admin/posts/edit/{{post.id}}?_method=put" method="post" enctype="multipart/form-data">
+          <form action="/user/posts/create" method="post" enctype="multipart/form-data">
             <div class="form-group">
               <label for="title" class="col-form-label">Title</label>
-              <input id="title" name="title" type="text" class="form-control" value="{{post.title}}"/>
+              <input id="title" name="title" type="text" class="form-control {{#if errors.title}} is-invalid {{/if}}" placeholder="Enter Title" required>
+              <div class="invalid-feedback">
+                {{errors.title}}
+              </div>
             </div>
 
             <div class="form-group">
               <label for="status">Status</label>
-              <select id="status" name="status" class="form-control">
+              <select id="status" name="status" class="form-control" required>
                 <option>Choose Status</option>
-                {{#selectHelper post.status}}
-                  <option value="public">Public</option>
-                  <option value="private">Private</option>
-                  <option value="draft">Draft</option>
-                {{/selectHelper}}
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+                <option value="draft">Draft</option>
               </select>
             </div>
 
             <div class="form-group">
               <label for="category">Category</label>
               <select id="category" name="category" class="form-control">
-                <option value="">Choose Category</option>
+                <option>Choose Category</option>
                 {{#each categories}}
                   <option value="{{id}}">{{name}}</option>
                 {{/each}}
@@ -54,8 +54,7 @@
 
             <div class="form-group">
               <label class="custom-control custom-checkbox">
-                <input id="allowComments" name="allowComments" type="checkbox" class="custom-control-input"
-                {{#if post.allowComments}} checked="checked" {{/if}}>
+                <input id="allowComments" name="allowComments" type="checkbox" checked="" class="custom-control-input">
                 <span class="custom-control-label">Allow Comments</span>
               </label>
             </div>
@@ -67,12 +66,15 @@
 
             <div class="form-group">
               <label for="description">Description</label>
-              <textarea id="description" name="description" class="form-control editable">{{post.description}}</textarea>
+              <textarea id="description" name="description" class="form-control editable {{#if errors.description}} is-invalid {{/if}}" required></textarea>
+              <div class="invalid-feedback">
+                {{errors.description}}
+              </div>
               <p>Highlight text to enable formatting.</p>
             </div>
 
             <div class="form-group">
-              <button class="btn btn-primary" type="submit">Save Changes</button>
+              <button class="btn btn-primary" type="submit">Create Post</button>
             </div>
           </form>
         </div>

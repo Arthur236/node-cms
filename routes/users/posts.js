@@ -7,26 +7,26 @@ const Category = require('../../models/Category');
 const Post = require('../../models/Post');
 
 const { uploadDir } = require('../../utils/uploadHelper');
-const { userIsAdmin } = require('../../utils/authenticate');
+const { userIsAuthenticated } = require('../../utils/authenticate');
 
 const router = express.Router();
 
-router.all('/*', userIsAdmin, (req, res, next) => {
-  req.app.locals.layout = 'admin';
+router.all('/*', userIsAuthenticated, (req, res, next) => {
+  req.app.locals.layout = 'index';
   next();
 });
 
 router.get('/', (req, res) => {
-  Post.find({}).populate('category').populate('user').then((posts) => {
-    res.render('admin/posts', { posts });
+  Post.find({ user: req.user.id }).populate('category').populate('user').then((posts) => {
+    res.render('users/posts', { posts });
   }).catch((error) => {
-    console.log('Could not fetch posts\n', error);
+    console.log('Could not fetch your posts\n', error);
   });
 });
 
 router.get('/create', (req, res) => {
   Category.find({}).then((categories) => {
-    res.render('admin/posts/create', { categories });
+    res.render('users/posts/create', { categories });
   });
 });
 
@@ -42,7 +42,7 @@ router.post('/create', (req, res) => {
   }
 
   if (!isEmpty(errors)) {
-    res.render('admin/posts/create', { errors });
+    res.render('users/posts/create', { errors });
   } else {
     const allowComments = !!req.body.allowComments;
 
@@ -70,47 +70,38 @@ router.post('/create', (req, res) => {
     newPost.save().then((savedPost) => {
       req.flash('success_message', 'The post was successfully created');
 
-      res.redirect('/admin/posts');
+      res.redirect('/user/posts');
     }).catch((error) => {
       console.log('Could not create your post\n', error);
-      res.render('admin/posts/create', { errors: error.errors });
+      res.render('users/posts/create', { errors: error.errors });
     });
   }
-});
-
-router.get('/generate', (req, res) => {
-  res.render('admin/posts/generate');
-});
-
-router.post('/generate', (req, res) => {
-  for (let i = 0; i < req.body.amount; i++) {
-    const post = new Post();
-
-    post.title = faker.random.words();
-    post.status = 'public';
-    post.allowComments = faker.random.boolean();
-    post.description = faker.lorem.sentences();
-
-    post.save().then((savedPost) => {
-      console.log(`Post ${savedPost.title} created successfully`);
-    });
-  }
-
-  res.redirect('/admin/posts');
 });
 
 router.get('/:id', (req, res) => {
-  Post.findOne({ _id: req.params.id }).populate('category').then((post) => {
-    res.render('admin/posts/view', { post });
+  Post.findOne({ _id: req.params.id }).populate('category').populate('user').then((post) => {
+    if (post.user.id !== req.user.id) {
+      req.flash('error_message', 'The post you are looking for either does not exist or does not belong to you');
+
+      return res.redirect('/user/posts')
+    }
+
+    res.render('users/posts/view', { post });
   }).catch((error) => {
     console.log('Could not find that post\n', error);
   });
 });
 
 router.get('/edit/:id', (req, res) => {
-  Post.findOne({ _id: req.params.id }).populate('category').then((post) => {
+  Post.findOne({ _id: req.params.id }).populate('category').populate('user').then((post) => {
+    if (post.user.id !== req.user.id) {
+      req.flash('error_message', 'The post you are looking for either does not exist or does not belong to you');
+
+      return res.redirect('/user/posts')
+    }
+
     Category.find({}).then((categories) => {
-      res.render('admin/posts/edit', { post, categories });
+      res.render('users/posts/edit', { post, categories });
     });
   }).catch((error) => {
     console.log('Could not find that post\n', error);
@@ -118,7 +109,13 @@ router.get('/edit/:id', (req, res) => {
 });
 
 router.put('/edit/:id', (req, res) => {
-  Post.findOne({ _id: req.params.id }).then((post) => {
+  Post.findOne({ _id: req.params.id }).populate('user').then((post) => {
+    if (post.user.id !== req.user.id) {
+      req.flash('error_message', 'The post you are looking for either does not exist or does not belong to you');
+
+      return res.redirect('/user/posts')
+    }
+
     const allowComments = !!req.body.allowComments;
 
     post.title = req.body.title;
@@ -149,7 +146,7 @@ router.put('/edit/:id', (req, res) => {
     post.save().then((updatedPost) => {
       req.flash('success_message', 'The post was updated successfully');
 
-      res.redirect(`/admin/posts/${post.id}`);
+      res.redirect(`/user/posts/${post.id}`);
     }).catch((error) => {
       req.flash('error_message', error.message);
 
@@ -161,7 +158,13 @@ router.put('/edit/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  Post.findOne({ _id: req.params.id }).populate('comments').then((post) => {
+  Post.findOne({ _id: req.params.id }).populate('comments').populate('user').then((post) => {
+    if (post.user.id !== req.user.id) {
+      req.flash('error_message', 'The post you are looking for either does not exist or does not belong to you');
+
+      return res.redirect('/user/posts')
+    }
+
     if (post.photo !== '') {
       fs.unlink(uploadDir + post.photo, (err) => {
         if (err) console.log(err);
@@ -177,7 +180,7 @@ router.delete('/:id', (req, res) => {
     post.remove().then((deletedPost) => {
       req.flash('success_message', 'The post was deleted successfully');
 
-      res.redirect('/admin/posts');
+      res.redirect('/user/posts');
     });
   }).catch((error) => {
     console.log('Could not delete that post\n', error);
