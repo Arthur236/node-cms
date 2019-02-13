@@ -24,7 +24,7 @@ router.post('/create', (req, res) => {
 
   newCategory.save().then((savedCategory) => {
     res.redirect('/admin/categories');
-    console.log(`${savedCategory.name} category created successfully`);
+    console.log('The category created successfully');
   });
 });
 
@@ -51,7 +51,7 @@ router.put('/edit/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   Category.findOne({ _id: req.params.id }).then((category) => {
     category.remove().then((deletedCategory) => {
-      req.flash('success_message', `${deletedCategory.name} was deleted successfully`);
+      req.flash('success_message', 'The category was deleted successfully');
 
       res.redirect('/admin/categories');
     });

@@ -6,8 +6,9 @@
         <div class="page-breadcrumb">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/admin" class="breadcrumb-link">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="/admin/posts/{{post.id}}" class="breadcrumb-link">{{post.title}}</a></li>
+              <li class="breadcrumb-item"><a href="/user/posts" class="breadcrumb-link">My Posts</a></li>
+              <li class="breadcrumb-item"><a href="/user/posts/{{post.id}}" class="breadcrumb-link">{{post.title}}</a>
+              </li>
               <li class="breadcrumb-item active" aria-current="page">Edit Post</li>
             </ol>
           </nav>
@@ -24,7 +25,7 @@
         <h5 class="card-header">Edit {{post.title}}</h5>
 
         <div class="card-body">
-          <form action="/admin/posts/edit/{{post.id}}?_method=put" method="post" enctype="multipart/form-data">
+          <form action="/user/posts/edit/{{post.id}}?_method=put" method="post" enctype="multipart/form-data">
             <div class="form-group">
               <label for="title" class="col-form-label">Title</label>
               <input id="title" name="title" type="text" class="form-control" value="{{post.title}}"/>
@@ -55,7 +56,7 @@
             <div class="form-group">
               <label class="custom-control custom-checkbox">
                 <input id="allowComments" name="allowComments" type="checkbox" class="custom-control-input"
-                {{#if post.allowComments}} checked="checked" {{/if}}>
+                  {{#if post.allowComments}} checked="checked" {{/if}}>
                 <span class="custom-control-label">Allow Comments</span>
               </label>
             </div>
@@ -67,7 +68,8 @@
 
             <div class="form-group">
               <label for="description">Description</label>
-              <textarea id="description" name="description" class="form-control editable">{{post.description}}</textarea>
+              <textarea id="description" name="description"
+                        class="form-control editable">{{post.description}}</textarea>
               <p>Highlight text to enable formatting.</p>
             </div>
 
