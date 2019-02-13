@@ -1,4 +1,9 @@
-.dashboard-wrapper {
+textarea {
+  resize: none;
+}
+
+.dashboard-wrapper,
+.error-wrapper {
   margin-left: 0;
   min-height: calc(100vh - 60px) !important;
   position: relative;
@@ -10,5 +15,5 @@
 }
 
 .medium-editor-element {
-  min-height: 120px;
+  margin-bottom: 20px;
 }

@@ -1,5 +1,7 @@
 <div class="container-fluid dashboard-content">
-  <h2>Posts</h2>
+  <h2>My Posts</h2>
+
+  {{> flash-messages }}
 
   <div class="row">
     {{#each posts}}
@@ -9,7 +11,7 @@
           <div class="card-body">
             <h3 class="card-title">{{title}}</h3>
             <textarea class="editor card-text">{{description}}</textarea>
-            <p><a href="/posts/{{id}}" class="btn btn-primary">Read More &rarr;</a></p>
+            <p><a href="/user/posts/{{id}}" class="btn btn-primary">Read More &rarr;</a></p>
             <p class="text-muted">Posted on {{formatDate date 'MMMM Do YYYY'}} by {{user.username}}</p>
           </div>
         </div>
