@@ -18,7 +18,7 @@
   <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="card">
-        <h5 class="card-header">{{post.title}}</h5>
+        <h5 class="card-header">{{post.title}} by {{user.username}}</h5>
         <div class="card-body">
           <div class="media">
             <div class="media-body">
@@ -27,7 +27,9 @@
               <h6>Date: {{formatDate date 'MMMM Do YYYY'}}</h6>
 
               <p>
-                <img {{#if post.photo}} src="/uploads/{{post.photo}}" {{else}} src="/images/card-placeholder.png" {{/if}} class="img-fluid" alt="{{post.title}}"/>
+                <img {{#if post.photo}}
+                src="/uploads/{{post.photo}}" {{else}}
+                src="/images/card-placeholder.png" {{/if}} class="img-fluid" alt="{{post.title}}"/>
               </p>
 
               <textarea class="editor">
@@ -35,6 +37,82 @@
               </textarea>
             </div>
           </div>
+
+          <hr/>
+
+          <h5>Comments</h5>
+
+          {{#if user}}
+            {{#if post.allowComments}}
+              <form action="/comments/{{post.id}}" method="post">
+                <div class="form-group">
+                <textarea class="form-control" id="body" name="body" placeholder="Write your comment here..."
+                          required></textarea>
+                </div>
+
+                <div class="form-group">
+                  <button class="btn btn-primary" type="submit">Comment</button>
+                </div>
+              </form>
+
+            {{else}}
+              <h6>Comments are disabled for this post</h6>
+              <hr/>
+
+            {{/if}}
+
+          {{else}}
+            <h6>You need to <a href="/auth/login">login</a> to comment</h6>
+            <hr/>
+
+          {{/if}}
+
+          <ul class="list-unstyled">
+            {{#each post.comments}}
+              <li class="media my-4">
+                <img class=" mr-3 user-avatar-lg rounded-circle" src="/images/avatar-1.jpg" alt="avatar">
+              <div class="media-body">
+                <h5 class="mt-0 mb-1">{{user.username}} &nbsp;
+                  <small>{{formatDate date 'MMMM Do YYYY'}}</small>
+                </h5>
+                {{body}}
+
+                {{#compare user.username '===' ../user.username}}
+                  <p>
+                    <a href="#" title="Delete {{name}}" data-toggle="modal" data-target="#deleteModal_{{id}}"><i
+                        class="fas fa-trash"></i></a>
+                  </p>
+                </div>
+                {{/compare}}
+              </li>
+
+              <!-- Delete Modal -->
+              <div class="modal fade" id="deleteModal_{{id}}" tabindex="-1" role="dialog"
+                   aria-labelledby="deleteModal_{{id}}Label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="deleteModal_{{id}}Label">Delete Comment</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to delete this comment
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+
+                      <form id="form-delete-comment" action="/comments/{{../post.id}}/{{id}}?_method=delete"
+                            method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </ul>
         </div>
       </div>
     </div>
