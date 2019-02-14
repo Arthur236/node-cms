@@ -78,8 +78,8 @@ router.post('/create', (req, res) => {
   }
 });
 
-router.get('/:id', (req, res) => {
-  Post.findOne({ _id: req.params.id }).populate('category').populate('user').then((post) => {
+router.get('/:slug', (req, res) => {
+  Post.findOne({ slug: req.params.slug }).populate('category').populate('user').then((post) => {
     if (post.user.id !== req.user.id) {
       req.flash('error_message', 'The post you are looking for either does not exist or does not belong to you');
 
@@ -92,8 +92,8 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.get('/edit/:id', (req, res) => {
-  Post.findOne({ _id: req.params.id }).populate('category').populate('user').then((post) => {
+router.get('/edit/:slug', (req, res) => {
+  Post.findOne({ slug: req.params.slug }).populate('category').populate('user').then((post) => {
     if (post.user.id !== req.user.id) {
       req.flash('error_message', 'The post you are looking for either does not exist or does not belong to you');
 
@@ -108,8 +108,8 @@ router.get('/edit/:id', (req, res) => {
   });
 });
 
-router.put('/edit/:id', (req, res) => {
-  Post.findOne({ _id: req.params.id }).populate('user').then((post) => {
+router.put('/edit/:slug', (req, res) => {
+  Post.findOne({ slug: req.params.slug }).populate('user').then((post) => {
     if (post.user.id !== req.user.id) {
       req.flash('error_message', 'The post you are looking for either does not exist or does not belong to you');
 
@@ -146,19 +146,19 @@ router.put('/edit/:id', (req, res) => {
     post.save().then((updatedPost) => {
       req.flash('success_message', 'The post was updated successfully');
 
-      res.redirect(`/user/posts/${post.id}`);
+      res.redirect(`/user/posts/${post.slug}`);
     }).catch((error) => {
       req.flash('error_message', error.message);
 
-      res.redirect(`/user/posts/edit/${post.id}`);
+      res.redirect(`/user/posts/edit/${post.slug}`);
     });
   }).catch((error) => {
     console.log('Could not find that post\n', error);
   });
 });
 
-router.delete('/:id', (req, res) => {
-  Post.findOne({ _id: req.params.id }).populate('comments').populate('user').then((post) => {
+router.delete('/:slug', (req, res) => {
+  Post.findOne({ slug: req.params.slug }).populate('comments').populate('user').then((post) => {
     if (post.user.id !== req.user.id) {
       req.flash('error_message', 'The post you are looking for either does not exist or does not belong to you');
 
