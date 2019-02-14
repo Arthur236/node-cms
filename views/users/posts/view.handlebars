@@ -46,7 +46,7 @@
           </div>
 
           <div class="d-flex justify-content-end">
-            <a href="/user/posts/edit/{{post.id}}" class="btn btn-primary clearfix">Edit</a>
+            <a href="/user/posts/edit/{{post.slug}}" class="btn btn-primary clearfix">Edit</a>
           </div>
 
           <!-- Delete Modal -->
@@ -65,7 +65,7 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 
-                  <form action="/user/posts/{{post.id}}?_method=delete" method="post">
+                  <form action="/user/posts/{{post.slug}}?_method=delete" method="post">
                     <button type="submit" class="btn btn-danger">Delete</button>
                   </form>
                 </div>

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const URLSlugs = require('mongoose-url-slugs');
 
 const { Schema } = mongoose;
 
@@ -34,6 +34,10 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
+  slug: {
+    type: String,
+  },
 });
 
+UserSchema.plugin(URLSlugs('username', { field: 'slug'}));
 module.exports = mongoose.model('User', UserSchema);

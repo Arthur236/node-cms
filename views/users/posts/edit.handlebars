@@ -7,7 +7,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/user/posts" class="breadcrumb-link">My Posts</a></li>
-              <li class="breadcrumb-item"><a href="/user/posts/{{post.id}}" class="breadcrumb-link">{{post.title}}</a>
+              <li class="breadcrumb-item"><a href="/user/posts/{{post.slug}}" class="breadcrumb-link">{{post.title}}</a>
               </li>
               <li class="breadcrumb-item active" aria-current="page">Edit Post</li>
             </ol>
@@ -25,7 +25,7 @@
         <h5 class="card-header">Edit {{post.title}}</h5>
 
         <div class="card-body">
-          <form action="/user/posts/edit/{{post.id}}?_method=put" method="post" enctype="multipart/form-data">
+          <form action="/user/posts/edit/{{post.slug}}?_method=put" method="post" enctype="multipart/form-data">
             <div class="form-group">
               <label for="title" class="col-form-label">Title</label>
               <input id="title" name="title" type="text" class="form-control" value="{{post.title}}"/>

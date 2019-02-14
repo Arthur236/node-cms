@@ -44,7 +44,7 @@
 
           {{#if user}}
             {{#if post.allowComments}}
-              <form action="/comments/{{post.id}}" method="post">
+              <form action="/comments/{{post.slug}}" method="post">
                 <div class="form-group">
                 <textarea class="form-control" id="body" name="body" placeholder="Write your comment here..."
                           required></textarea>
@@ -79,7 +79,7 @@
 
                 {{#compare user.username '===' ../user.username}}
                   <p>
-                    <a href="#" title="Delete {{name}}" data-toggle="modal" data-target="#deleteModal_{{id}}"><i
+                    <a href="#" title="Delete {{name}}" data-toggle="modal" data-target="#deleteModal_{{slug}}"><i
                         class="fas fa-trash"></i></a>
                   </p>
                 </div>
@@ -87,12 +87,12 @@
               </li>
 
               <!-- Delete Modal -->
-              <div class="modal fade" id="deleteModal_{{id}}" tabindex="-1" role="dialog"
-                   aria-labelledby="deleteModal_{{id}}Label" aria-hidden="true">
+              <div class="modal fade" id="deleteModal_{{slug}}" tabindex="-1" role="dialog"
+                   aria-labelledby="deleteModal_{{slug}}Label" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="deleteModal_{{id}}Label">Delete Comment</h5>
+                      <h5 class="modal-title" id="deleteModal_{{slug}}Label">Delete Comment</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -103,7 +103,7 @@
                     <div class="modal-footer">
                       <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 
-                      <form id="form-delete-comment" action="/comments/{{../post.id}}/{{id}}?_method=delete"
+                      <form id="form-delete-comment" action="/comments/{{../post.slug}}/{{slug}}?_method=delete"
                             method="post">
                         <button type="submit" class="btn btn-danger">Delete</button>
                       </form>

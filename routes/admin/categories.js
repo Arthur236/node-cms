@@ -28,16 +28,16 @@ router.post('/create', (req, res) => {
   });
 });
 
-router.get('/edit/:id', (req, res) => {
-  Category.findOne({ _id: req.params.id }).then((category) => {
+router.get('/edit/:slug', (req, res) => {
+  Category.findOne({ slug: req.params.slug }).then((category) => {
     res.render('admin/categories/edit', { category });
   }).catch((error) => {
     console.log('Could not find that category\n', error);
   });
 });
 
-router.put('/edit/:id', (req, res) => {
-  Category.findOne({ _id: req.params.id }).then((category) => {
+router.put('/edit/:slug', (req, res) => {
+  Category.findOne({ slug: req.params.slug }).then((category) => {
     category.name = req.body.name;
 
     category.save().then((updatedCategroy) => {
@@ -48,8 +48,8 @@ router.put('/edit/:id', (req, res) => {
   });
 });
 
-router.delete('/:id', (req, res) => {
-  Category.findOne({ _id: req.params.id }).then((category) => {
+router.delete('/:slug', (req, res) => {
+  Category.findOne({ slug: req.params.slug }).then((category) => {
     category.remove().then((deletedCategory) => {
       req.flash('success_message', 'The category was deleted successfully');
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const URLSlugs = require('mongoose-url-slugs');
 
 const { Schema } = mongoose;
 
@@ -12,6 +13,10 @@ const CategorySchema = new Schema({
     type: Date,
     default: Date.now(),
   },
+  slug: {
+    type: String,
+  },
 });
 
+CategorySchema.plugin(URLSlugs('name', { field: 'slug'}));
 module.exports = mongoose.model('Category', CategorySchema);

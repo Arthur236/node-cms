@@ -22,7 +22,7 @@
         <h5 class="card-header">Edit the {{category.name}} Category</h5>
 
         <div class="card-body">
-          <form action="/admin/categories/edit/{{category.id}}?_method=put" method="post">
+          <form action="/admin/categories/edit/{{category.slug}}?_method=put" method="post">
             <div class="form-group">
               <label for="name" class="col-form-label">Name</label>
               <input id="name" name="name" type="text" class="form-control {{#if errors.name}} is-invalid {{/if}}" placeholder="Enter Name" required value="{{category.name}}">

@@ -99,16 +99,16 @@ router.post('/generate', (req, res) => {
   res.redirect('/admin/posts');
 });
 
-router.get('/:id', (req, res) => {
-  Post.findOne({ _id: req.params.id }).populate('category').then((post) => {
+router.get('/:slug', (req, res) => {
+  Post.findOne({ slug: req.params.slug }).populate('category').then((post) => {
     res.render('admin/posts/view', { post });
   }).catch((error) => {
     console.log('Could not find that post\n', error);
   });
 });
 
-router.get('/edit/:id', (req, res) => {
-  Post.findOne({ _id: req.params.id }).populate('category').then((post) => {
+router.get('/edit/:slug', (req, res) => {
+  Post.findOne({ slug: req.params.slug }).populate('category').then((post) => {
     Category.find({}).then((categories) => {
       res.render('admin/posts/edit', { post, categories });
     });
@@ -117,8 +117,8 @@ router.get('/edit/:id', (req, res) => {
   });
 });
 
-router.put('/edit/:id', (req, res) => {
-  Post.findOne({ _id: req.params.id }).then((post) => {
+router.put('/edit/:slug', (req, res) => {
+  Post.findOne({ slug: req.params.slug }).then((post) => {
     const allowComments = !!req.body.allowComments;
 
     post.title = req.body.title;
@@ -149,19 +149,19 @@ router.put('/edit/:id', (req, res) => {
     post.save().then((updatedPost) => {
       req.flash('success_message', 'The post was updated successfully');
 
-      res.redirect(`/admin/posts/${post.id}`);
+      res.redirect(`/admin/posts/${post.slug}`);
     }).catch((error) => {
       req.flash('error_message', error.message);
 
-      res.redirect(`/user/posts/edit/${post.id}`);
+      res.redirect(`/user/posts/edit/${post.slug}`);
     });
   }).catch((error) => {
     console.log('Could not find that post\n', error);
   });
 });
 
-router.delete('/:id', (req, res) => {
-  Post.findOne({ _id: req.params.id }).populate('comments').then((post) => {
+router.delete('/:slug', (req, res) => {
+  Post.findOne({ slug: req.params.slug }).populate('comments').then((post) => {
     if (post.photo !== '') {
       fs.unlink(uploadDir + post.photo, (err) => {
         if (err) console.log(err);
