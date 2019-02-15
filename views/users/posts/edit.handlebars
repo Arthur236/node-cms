@@ -34,7 +34,6 @@
             <div class="form-group">
               <label for="status">Status</label>
               <select id="status" name="status" class="form-control">
-                <option>Choose Status</option>
                 {{#selectHelper post.status}}
                   <option value="public">Public</option>
                   <option value="private">Private</option>
@@ -46,7 +45,6 @@
             <div class="form-group">
               <label for="category">Category</label>
               <select id="category" name="category" class="form-control">
-                <option value="">Choose Category</option>
                 {{#each categories}}
                   <option value="{{id}}">{{name}}</option>
                 {{/each}}

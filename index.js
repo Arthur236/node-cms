@@ -11,7 +11,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 
-const { select, formatDate, compare } = require('./utils/handlebarsHelpers');
+const { select, formatDate, compare, paginate } = require('./utils/handlebarsHelpers');
 const { mongoDBUrl } = require('./config/database');
 
 const mainRoutes = require('./routes/home/index');
@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Express handlebars looks for layouts inside our views/layouts folder by default
  */
 app.engine('handlebars', expressHandlebars({ defaultLayout: 'index',
-  helpers: { selectHelper: select, formatDate, compare } }));
+  helpers: { selectHelper: select, formatDate, compare, paginate } }));
 app.set('view engine', 'handlebars');
 
 app.use(upload());

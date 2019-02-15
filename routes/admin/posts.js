@@ -17,9 +17,23 @@ router.all('/*', userIsAdmin, (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-  Post.find({}).populate('category').populate('user').then((posts) => {
-    res.render('admin/posts', { posts });
-  }).catch((error) => {
+  const limit = req.query.limit || 12;
+  const page = req.query.page || 1;
+
+  Post.find({})
+    .populate('category')
+    .populate('user')
+    .skip((limit * page) - limit)
+    .limit(limit)
+    .then((posts) => {
+      Post.countDocuments().then((postCount) => {
+        res.render('admin/posts', {
+          posts,
+          currentPage: parseInt(page),
+          pages: Math.ceil(postCount / limit)
+        });
+      });
+    }).catch((error) => {
     console.log('Could not fetch posts\n', error);
   });
 });
@@ -90,6 +104,8 @@ router.post('/generate', (req, res) => {
     post.status = 'public';
     post.allowComments = faker.random.boolean();
     post.description = faker.lorem.sentences();
+    post.user = req.user.id;
+    post.slug = faker.name.title();
 
     post.save().then((savedPost) => {
       console.log(`Post ${savedPost.title} created successfully`);

@@ -17,9 +17,23 @@ router.all('/*', userIsAuthenticated, (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-  Post.find({ user: req.user.id }).populate('category').populate('user').then((posts) => {
-    res.render('users/posts', { posts });
-  }).catch((error) => {
+  const limit = req.query.limit || 10;
+  const page = req.query.page || 1;
+
+  Post.find({ user: req.user.id })
+    .populate('category')
+    .populate('user')
+    .skip((limit * page) - limit)
+    .limit(limit)
+    .then((posts) => {
+      Post.countDocuments().then((postCount) => {
+        res.render('users/posts', {
+          posts,
+          currentPage: parseInt(page),
+          pages: Math.ceil(postCount / limit)
+        });
+      });
+    }).catch((error) => {
     console.log('Could not fetch your posts\n', error);
   });
 });
