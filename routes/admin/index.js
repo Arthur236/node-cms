@@ -15,15 +15,26 @@ router.all('/*', userIsAdmin, (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-  Post.countDocuments({}).then((postCount) => {
-    Category.countDocuments({}).then((categoryCount) => {
-      Comment.countDocuments({}).then((commentCount) => {
-        User.countDocuments({}).then((userCount) => {
-          res.render('admin/index', { postCount, categoryCount, commentCount, userCount });
-        });
-      });
-    });
+  const promises = [
+    Post.countDocuments().exec(),
+    Category.countDocuments().exec(),
+    Comment.countDocuments().exec(),
+    User.countDocuments().exec(),
+  ];
+
+  Promise.all(promises).then(([postCount, categoryCount, commentCount, userCount]) => {
+    res.render('admin/index', { postCount, categoryCount, commentCount, userCount });
   });
+
+  // Post.countDocuments({}).then((postCount) => {
+  //   Category.countDocuments({}).then((categoryCount) => {
+  //     Comment.countDocuments({}).then((commentCount) => {
+  //       User.countDocuments({}).then((userCount) => {
+  //         res.render('admin/index', { postCount, categoryCount, commentCount, userCount });
+  //       });
+  //     });
+  //   });
+  // });
 });
 
 module.exports = router;
