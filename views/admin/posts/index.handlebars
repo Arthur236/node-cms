@@ -24,7 +24,8 @@
         <div class="card card-figure">
           <figure class="figure">
             <div class="figure-img">
-              <img class="img-fluid" {{#if photo}} src="/uploads/{{photo}}" {{else}} src="/images/card-placeholder.png" {{/if}} alt="{{title}}">
+              <img class="img-fluid" {{#if photo}}
+                   src="/uploads/{{photo}}" {{else}} src="/images/card-placeholder.png" {{/if}} alt="{{title}}">
 
               <div class="figure-description">
                 <h6 class="figure-title"> {{title}} </h6>
@@ -64,6 +65,11 @@
       </div>
 
     {{/each}}
-
   </div>
+
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+      {{#paginate current=currentPage pages=pages}}{{/paginate}}
+    </ul>
+  </nav>
 </div>

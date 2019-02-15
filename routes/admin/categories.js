@@ -12,9 +12,21 @@ router.all('/*', userIsAdmin, (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-  Category.find({}).then((categories) => {
-    res.render('admin/categories', { categories });
-  });
+  const limit = req.query.limit || 10;
+  const page = req.query.page || 1;
+
+  Category.find({})
+    .skip((limit * page) - limit)
+    .limit(limit)
+    .then((categories) => {
+      Category.countDocuments().then((categoryCount) => {
+        res.render('admin/categories', {
+          categories,
+          currentPage: parseInt(page),
+          pages: Math.ceil(categoryCount / limit)
+        });
+      });
+    });
 });
 
 router.post('/create', (req, res) => {

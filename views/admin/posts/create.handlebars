@@ -35,7 +35,6 @@
             <div class="form-group">
               <label for="status">Status</label>
               <select id="status" name="status" class="form-control" required>
-                <option>Choose Status</option>
                 <option value="public">Public</option>
                 <option value="private">Private</option>
                 <option value="draft">Draft</option>
@@ -45,7 +44,6 @@
             <div class="form-group">
               <label for="category">Category</label>
               <select id="category" name="category" class="form-control">
-                <option>Choose Category</option>
                 {{#each categories}}
                   <option value="{{id}}">{{name}}</option>
                 {{/each}}
