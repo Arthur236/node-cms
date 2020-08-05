@@ -1,7 +1,9 @@
 require('dotenv').config();
 
 const express = require('express');
+const Handlebars = require('handlebars');
 const expressHandlebars = require('express-handlebars');
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -24,7 +26,7 @@ const userPosts = require('./routes/users/posts');
 
 const app = express();
 
-mongoose.connect(mongoDBUrl, { useNewUrlParser: true })
+mongoose.connect(mongoDBUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((db) => {
     console.log('DB connected');
   }).catch((error) => {
@@ -37,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Define the template engine to be used
  * Express handlebars looks for layouts inside our views/layouts folder by default
  */
-app.engine('handlebars', expressHandlebars({ defaultLayout: 'index',
+app.engine('handlebars', expressHandlebars({ defaultLayout: 'index', handlebars: allowInsecurePrototypeAccess(Handlebars),
   helpers: { selectHelper: select, formatDate, compare, paginate } }));
 app.set('view engine', 'handlebars');
 
@@ -93,5 +95,5 @@ app.use(function(req, res, next){
 const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
-  console.log('\x1b[35m%s\x1b[0m', `\nThe server is running on port ${port}`);
+  console.log('\x1b[35m%s\x1b[0m', `\nThe server is running on http::/localhost:${port}`);
 });

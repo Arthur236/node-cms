@@ -154,7 +154,7 @@
    ========================================================================== */
 
 body {
-  font-family: 'Circular Std Book';
+  font-family: 'Nunito', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -171,7 +171,8 @@ h5,
 h6 {
   color: #3d405c;
   margin: 0px 0px 15px 0px;
-  font-family: 'Circular Std Medium';
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
 }
 
 h1 {
@@ -2284,7 +2285,8 @@ Pageheader
   padding: 31px 15px;
   text-align: center;
   left: 10px;
-  font-family: 'Circular Std Medium';
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
   color: #fff;
 }
 
@@ -2349,7 +2351,8 @@ Pageheader
   right: 0;
   font-size: 16px;
   color: #3d405c;
-  font-family: 'Circular Std Medium';
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
   line-height: 1;
 }
 
@@ -2609,7 +2612,8 @@ input[type=radio] {
   text-align: center;
   color: #333;
   font-size: 13px;
-  font-family: 'Circular Std Medium';
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
   line-height: 1.6;
   -webkit-transform: translateX(-100%);
   transform: translateX(-100%);
@@ -4489,7 +4493,8 @@ Pills vertical
 .table thead th,
 .table th {
   color: #3d405c;
-  font-family: 'Circular Std Medium';
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
 }
 
 .table-bordered {
@@ -4519,7 +4524,8 @@ tr.group,
 tr.group:hover {
   background-color: #5969ff !important;
   color: #fff;
-  font-family: 'Circular Std Medium';
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
   font-size: 18px;
 }
 
